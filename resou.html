@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			#so{
+				margin: auto;
+			}
+			ul{
+				list-style: none;
+				position: absolute;
+				border: #999 1px solid;
+			}
+			ul li{
+				display: block;
+				background-color: #fff;
+				
+				width: 150px;
+			}
+			ul li:hover{
+				background-color: skyblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="so">
+			<input type="text" name="wd" id="so" value=""  />
+			<input type="button" name="" id="" value="搜索" />
+			<ul>
+				
+			</ul>
+		</div>
+		<script type="text/javascript">
+			function so(res){
+				var wds=res["result"];
+				for(var i=0,str="";i<wds.length;i++){
+					str=str+"<li>"+wds[i].word+"</li>";
+				}
+				document.getElementsByTagName("ul")[0].innerHTML=str;
+			}
+			
+			document.getElementsByName("wd")[0].oninput=function(){
+				var url= 'http://sug.so.360.cn/suggest?callback=so&encodein=utf-8&encodeout=utf-8&format=json&word=' + this.value;
+				var script=document.createElement("script");
+				script.src=url;
+				
+				var head=document.getElementsByTagName("head")[0];
+				head.appendChild(script);
+			}
+			
+			
+		</script>
+	</body>
+</html>
